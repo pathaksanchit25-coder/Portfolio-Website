@@ -5,32 +5,61 @@ import { useGSAP } from '@gsap/react';
 import { FaGithub } from "react-icons/fa";
 import gsap from 'gsap';
 
-const Navbar = ({timeline}) => {
+const Navbar = ({ timeline, pointRef }) => {
   const { contextSafe } = useGSAP();
   const [isOpen, setIsOpen] = useState(false);
 
-  const navAnimation = contextSafe(() => {
+  const pointerEnter = (text) => {
+    gsap.to(pointRef.current, {
+      width: 110,
+      height: 45,
+      borderRadius: 12,
+      duration: 0.3,
+      ease: "power2.out",
+    });
 
+    const pointerText = pointRef.current.querySelector('.pointerText');
+    if (pointerText) {
+      pointerText.innerHTML = text;
+    }
+  };
+
+  const pointerLeave = () => {
+    gsap.to(pointRef.current, {
+      width: 12,
+      height: 12,
+      borderRadius: "50%",
+      duration: 0.3,
+      ease: "power2.inOut",
+    });
+
+    const pointerText = pointRef.current.querySelector('.pointerText');
+    if (pointerText) {
+      pointerText.innerHTML = '';
+    }
+  };
+
+  const navAnimation = contextSafe(() => {
     timeline.from('.logo-name', {
       y: -300,
       opacity: 0,
-      duration: 0.4,
-      ease: 'power1.out',
+      duration: 0.5,
+      ease: 'power3.out',
     });
 
     timeline.from('.links a', {
       y: -300,
       opacity: 0,
-      duration: 0.4,
-      ease: 'power1.out',
+      duration: 0.5,
+      ease: 'power3.out',
       stagger: 0.15,
     });
 
     timeline.from('.button', {
       y: -300,
       opacity: 0,
-      duration: 0.4,
-      ease: 'power1.out',
+      duration: 0.5,
+      ease: 'power3.out',
     });
   });
 
@@ -49,9 +78,30 @@ const Navbar = ({timeline}) => {
 
         {/* Links (desktop) */}
         <div className="links hidden md:flex gap-6 lg:gap-20 text-sm sm:text-base">
-          <Link to="/about">About</Link>
-          <Link to="/services">Services</Link>
-          <Link to="/contacts">Contacts</Link>
+          <Link
+            to="/about"
+            className="flex items-center gap-2"
+            onMouseEnter={() => pointerEnter("More About me")}
+            onMouseLeave={pointerLeave}
+          >
+            About
+          </Link>
+          <Link
+            to="/services"
+            className="flex items-center gap-2"
+            onMouseEnter={() => pointerEnter("Our Services")}
+            onMouseLeave={pointerLeave}
+          >
+            Services
+          </Link>
+          <Link
+            to="/contacts"
+            className="flex items-center gap-2"
+            onMouseEnter={() => pointerEnter("Get in Touch")}
+            onMouseLeave={pointerLeave}
+          >
+            Contacts
+          </Link>
         </div>
 
         {/* Button (desktop) */}
@@ -61,12 +111,12 @@ const Navbar = ({timeline}) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-<button
-  className="flex items-center gap-2 border-2 px-3 py-2 sm:px-4 sm:py-3 rounded-2xl text-sm sm:text-base mr-2 font-semibold transition-all duration-300 hover:bg-gray-100 hover:scale-105 hover:shadow-lg hover:text-black"
->
-  <FaGithub className="text-lg sm:text-xl" />
-  GitHub Profile
-</button>
+            <button
+              className="flex items-center gap-2 border-2 px-3 py-2 sm:px-4 sm:py-3 rounded-2xl text-sm sm:text-base mr-2 font-semibold transition-all duration-300 hover:bg-gray-100 hover:scale-105 hover:shadow-lg hover:text-black"
+            >
+              <FaGithub className="text-lg sm:text-xl" />
+              GitHub Profile
+            </button>
           </a>
         </div>
 
@@ -76,34 +126,13 @@ const Navbar = ({timeline}) => {
             className="text-white focus:outline-none"
             onClick={() => setIsOpen(!isOpen)}
           >
-            {/* Hamburger / Close icon */}
             {isOpen ? (
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             ) : (
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             )}
           </button>

@@ -5,24 +5,25 @@ import MainLogo from './MainLogo'
 import SocialMedia from './SocialMedia'
 
 const Mainbody = ({ timeline }) => {
-    return (
-        <div className='text-white h-[80%] w-screen '>
-            <div className="upper-section">
-                <div className="main h-full flex px-5 w-full ">
-                    <div className="title-description w-[60%] h-full">
-                        <MainTitle timeline={timeline} />
-                        <MainDescription timeline={timeline} />
-                    </div>
-                    <div className="logo w-[40%] flex items-center justify-center">
-                        <MainLogo timeline={timeline} />
-                    </div>
-                </div>
-            </div>
-            <div className="lower-section h-[20%] flex items-center w-full">
-                <SocialMedia timeline={timeline} />
-            </div>
+  return (
+    <div className="text-white w-screen flex flex-col">
+      {/* Upper Section */}
+      <div className="upper-section flex flex-col md:flex-row w-full px-5 md:px-10">
+        <div className="title-description w-full md:w-[60%]">
+          <MainTitle timeline={timeline} />
+          <MainDescription timeline={timeline} />
         </div>
-    )
+        <div className="logo w-full md:w-[40%] flex items-center justify-center mt-6 md:mt-0">
+          <MainLogo timeline={timeline} />
+        </div>
+      </div>
+
+      {/* Lower Section */}
+      <div className="lower-section w-full mt-8 md:mt-10 lg:mt-12">
+        <SocialMedia timeline={timeline} />
+      </div>
+    </div>
+  )
 }
 
 export default Mainbody
