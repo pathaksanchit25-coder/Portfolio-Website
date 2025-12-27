@@ -79,6 +79,14 @@ const Navbar = ({ timeline, pointRef }) => {
         {/* Links (desktop) */}
         <div className="links hidden md:flex gap-6 lg:gap-20 text-sm sm:text-base">
           <Link
+            to="/"
+            className="flex items-center gap-2"
+            onMouseEnter={() => pointerEnter("Back to Home")}
+            onMouseLeave={pointerLeave}
+          >
+            Home
+          </Link>
+          <Link
             to="/about"
             className="flex items-center gap-2"
             onMouseEnter={() => pointerEnter("More About me")}
@@ -142,6 +150,7 @@ const Navbar = ({ timeline, pointRef }) => {
       {/* Mobile dropdown menu */}
       {isOpen && (
         <div className="bg-[#111] text-white px-4 py-4 flex flex-col gap-4 md:hidden">
+          <Link to="/" onClick={() => setIsOpen(false)}>Home</Link>
           <Link to="/about" onClick={() => setIsOpen(false)}>About</Link>
           <Link to="/services" onClick={() => setIsOpen(false)}>Services</Link>
           <Link to="/contacts" onClick={() => setIsOpen(false)}>Contacts</Link>

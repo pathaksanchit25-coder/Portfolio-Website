@@ -1,17 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Navbar from './components/Navbar';
+import { Routes, Route } from 'react-router-dom';
 import gsap from 'gsap';
+
+import Navbar from './components/Navbar';
 import Mainbody from './components/Mainbody';
 import Projects from './components/Projects';
+import Services from './components/Services';
+import ChoseUs from './components/ChoseUs';
 import Footer from './components/Footer';
+import About from './pages/About';
 
 const App = () => {
-  const tl = useRef(gsap.timeline()); // persistent GSAP timeline
+  const tl = useRef(gsap.timeline());
   const pointRef = useRef(null);
   const [pointerText, setPointerText] = useState('');
 
   useEffect(() => {
-    // Use quickTo for smoother pointer tracking
     const xTo = gsap.quickTo(pointRef.current, "x", { duration: 0.8, ease: "back.out(1.4)" });
     const yTo = gsap.quickTo(pointRef.current, "y", { duration: 0.8, ease: "back.out(1.4)" });
 
@@ -38,15 +42,29 @@ const App = () => {
         <span className="pointerText whitespace-nowrap">{pointerText}</span>
       </div>
 
-      {/* Components */}
+      {/* Navbar always visible */}
       <Navbar timeline={tl.current} pointRef={pointRef} />
-      <Mainbody timeline={tl.current} />
 
-      {/* Shift Projects upward */}
-      <div className="relative -mt-10 md:mt-16 lg:mt-8">
-        <Projects timeline={tl.current} pointRef={pointRef} setPointerText={setPointerText} />
-      </div>
-      <div className="footer"><Footer/></div>
+      {/* Routes control page content */}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <Mainbody timeline={tl.current} />
+              <div className="relative -mt-10 md:mt-16 lg:mt-8">
+                <Projects timeline={tl.current} pointRef={pointRef} setPointerText={setPointerText} />
+              </div>
+              <Services />
+              <ChoseUs />
+            </>
+          }
+        />
+        <Route path="/about" element={<About />} />
+      </Routes>
+
+      {/* Footer always visible */}
+      <Footer />
     </div>
   );
 };
