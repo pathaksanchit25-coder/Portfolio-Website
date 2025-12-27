@@ -29,7 +29,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="h-screen w-screen bg-[#111] font-mono overflow-x-hidden relative">
+    <div className="min-h-screen w-screen bg-[#111] font-mono overflow-x-hidden relative">
       {/* Custom pointer */}
       <div
         ref={pointRef}

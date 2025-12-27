@@ -1,8 +1,17 @@
-import React from 'react';
+import React from "react";
 import { FaReact } from "react-icons/fa";
 import { SiExpress, SiMongodb, SiTailwindcss } from "react-icons/si";
 
-const ProjectCard = ({ title, category, description, link, status, pointerEnter, pointerLeave }) => {
+const ProjectCard = ({
+  title,
+  category,
+  description,
+  link,
+  status,
+  pointerEnter,
+  pointerLeave,
+  className = "",
+}) => {
   return (
     <a
       href={link}
@@ -11,22 +20,24 @@ const ProjectCard = ({ title, category, description, link, status, pointerEnter,
       className="w-full md:w-[48%]"
     >
       <div
-        className="card border border-white rounded-xl p-6 flex flex-col justify-between bg-[#111]"
-        style={{ height: "320px", width: "100%" }} // 🔹 fixed height & width
+        className={`card project-card ${className} border border-white rounded-xl p-6 flex flex-col justify-between bg-[#111]`}
+        style={{ height: "320px", width: "100%" }}
         onMouseEnter={pointerEnter}
         onMouseLeave={pointerLeave}
       >
         {/* Title + Category + Status */}
         <div className="flex flex-col gap-2">
-          <h1 className="text-xl font-semibold text-white tracking-wide">{title}</h1>
+          <h1 className="text-xl font-semibold text-white tracking-wide">
+            {title}
+          </h1>
+
           <div className="flex justify-between items-center text-sm">
             <span className="text-gray-400">{category}</span>
             <span
-              className={`px-2 py-0.5 rounded-full text-xs ${
-                status === "Completed"
+              className={`px-2 py-0.5 rounded-full text-xs ${status === "Completed"
                   ? "bg-green-600/20 text-green-400"
                   : "bg-yellow-600/20 text-yellow-400"
-              }`}
+                }`}
             >
               {status === "Completed" ? "Completed" : "In Progress"}
             </span>
@@ -38,7 +49,7 @@ const ProjectCard = ({ title, category, description, link, status, pointerEnter,
           {description}
         </p>
 
-        {/* Tech stack */}
+        {/* Tech Stack */}
         <div className="flex flex-wrap gap-4 text-gray-300 text-sm">
           <div className="flex items-center gap-1">
             <FaReact size={18} color="#61DBFB" />

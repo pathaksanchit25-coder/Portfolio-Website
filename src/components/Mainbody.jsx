@@ -8,7 +8,7 @@ const Mainbody = ({ timeline }) => {
   return (
     <div className="text-white w-screen flex flex-col">
       {/* Upper Section */}
-      <div className="upper-section flex flex-col md:flex-row w-full px-5 md:px-10">
+      <div className="upper-section flex flex-col md:flex-row w-full px-5 md:px-8">
         <div className="title-description w-full md:w-[60%]">
           <MainTitle timeline={timeline} />
           <MainDescription timeline={timeline} />

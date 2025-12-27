@@ -22,3 +22,7 @@
     background: #555;
     /* hover effect */
 }
+
+html, body {
+  overflow-x: hidden;
+}
